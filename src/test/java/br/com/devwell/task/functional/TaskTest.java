@@ -44,7 +44,7 @@ public class TaskTest {
 
         Assert.assertEquals("Success!",webDriver.findElement(By.id("message")).getText());
 
-        webDriver.close();
+        webDriver.quit();
 
     }
 }
