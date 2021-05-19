@@ -10,6 +10,10 @@ public class DateUtils {
         return formatDatePtString(LocalDate.now().plusDays(1));
     }
 
+    public static String onePastDateString(){
+        return formatDatePtString(LocalDate.now().plusDays(-1));
+    }
+
     public static String formatDatePtString(LocalDate date){
         return date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
