@@ -7,9 +7,14 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
@@ -33,9 +38,11 @@ public class TaskTest {
     @Parameter(value = 3)
     public String caseTest;
 
-    public WebDriver getWebDriver(){
+    public WebDriver getWebDriver() throws MalformedURLException {
         //open driver seleniumm
-        WebDriver webDriver =new ChromeDriver();
+        //WebDriver webDriver =new ChromeDriver();
+        Capabilities capbilities = DesiredCapabilities.chrome();
+        WebDriver webDriver =new RemoteWebDriver(new URL("http://192.168.10.20:4444/wd/hub"),capbilities);
         webDriver.navigate().to("http://localhost:8001/tasks");
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return webDriver;
@@ -55,7 +62,7 @@ public class TaskTest {
     }
 
     @Test
-    public void shouldCreateTask(){
+    public void shouldCreateTask() throws MalformedURLException {
         WebDriver webDriver = getWebDriver();
         try{
             //click add todo
