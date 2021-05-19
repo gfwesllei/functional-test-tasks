@@ -43,20 +43,14 @@ public class TaskTest {
     @Parameter(value = 3)
     public String caseTest;
 
-    public WebDriver webDriver;
-
-    @Before
-    public void setWebDriver(){
+    public WebDriver getWebDriver(){
         //open driver seleniumm
-        webDriver =new ChromeDriver();
+        WebDriver webDriver =new ChromeDriver();
         webDriver.navigate().to("http://localhost:8001/tasks");
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        return webDriver;
     }
 
-    @After
-    public void closeDrive(){
-        webDriver.quit();
-    }
 
     @Parameters(name = "{3}")
     public static Collection<Object[]> testParameters(){
@@ -72,19 +66,23 @@ public class TaskTest {
 
     @Test
     public void shouldCreateTask(){
+        WebDriver webDriver = getWebDriver();
+        try{
+            //click add todo
+            webDriver.findElement(By.id("addTodo")).click();
+            //set task name
+            webDriver.findElement(By.id("task")).sendKeys(todoName);
+            //set task date
+            webDriver.findElement(By.id("dueDate")).sendKeys(dateString);
+            //click save task
+            webDriver.findElement(By.id("saveButton")).click();
 
-        //click add todo
-        webDriver.findElement(By.id("addTodo")).click();
-        //set task name
-        webDriver.findElement(By.id("task")).sendKeys(todoName);
-        //set task date
-        webDriver.findElement(By.id("dueDate")).sendKeys(dateString);
-        //click save task
-        webDriver.findElement(By.id("saveButton")).click();
+            String message = webDriver.findElement(By.id("message")).getText();
 
-        String message = webDriver.findElement(By.id("message")).getText();
+            Assert.assertEquals(expectedMessage,message);
 
-        Assert.assertEquals(expectedMessage,message);
-
+        }finally {
+            webDriver.quit();
+        }
     }
 }
