@@ -42,7 +42,9 @@ public class TaskTest {
         //click save task
         webDriver.findElement(By.id("saveButton")).click();
 
-        Assert.assertEquals("Success!",webDriver.findElement(By.id("message")).getText());
+        String message = webDriver.findElement(By.id("message")).getText();
+
+        Assert.assertEquals("Success!",message);
 
         webDriver.quit();
 
