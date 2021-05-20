@@ -18,9 +18,15 @@ public class HealthCheckIT {
     public void healthCheckTest() throws MalformedURLException {
         Capabilities capbilities = DesiredCapabilities.chrome();
         WebDriver webDriver =new RemoteWebDriver(new URL("http://192.168.10.20:4444/wd/hub"),capbilities);
-        webDriver.navigate().to("http://192.168.10.20:9999/tasks");
-        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        String version = webDriver.findElement(By.id("version")).getText();
-        Assert.assertTrue(version.startsWith("build"));
+
+        try{
+            webDriver.navigate().to("http://192.168.10.20:9999/tasks");
+            webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            String version = webDriver.findElement(By.id("version")).getText();
+            Assert.assertTrue(version.startsWith("build"));
+        }finally {
+            webDriver.quit();
+        }
+
     }
 }

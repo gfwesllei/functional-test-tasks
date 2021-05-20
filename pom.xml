@@ -11,6 +11,7 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <skip.surefire.tests></skip.surefire.tests>
     </properties>
 
     <dependencies>
@@ -36,9 +37,25 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.20</version>
                 <configuration>
+                    <skipTests>${skip.surefire.tests}</skipTests>
                     <parallel>all</parallel>
                     <useUnlimitedThreads>true</useUnlimitedThreads>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.18.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>
+                                integration-test
+                            </goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
