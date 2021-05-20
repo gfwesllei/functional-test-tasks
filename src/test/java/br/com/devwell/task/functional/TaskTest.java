@@ -62,7 +62,7 @@ public class TaskTest {
     }
 
     @Test
-    public void shouldCreateTask() throws MalformedURLException {
+    public void parametrizedTestRun() throws MalformedURLException {
         WebDriver webDriver = getWebDriver();
         try{
             //click add todo
