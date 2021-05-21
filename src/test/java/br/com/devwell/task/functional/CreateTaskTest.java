@@ -22,7 +22,7 @@ import static br.com.devwell.task.functional.utils.DateUtils.onePastDateString;
 
 
 @RunWith(Parameterized.class)
-public class TaskTest {
+public class CreateTaskTest {
 
     @Parameter
     public String todoName;
@@ -80,4 +80,6 @@ public class TaskTest {
             webDriver.quit();
         }
     }
+
+
 }
