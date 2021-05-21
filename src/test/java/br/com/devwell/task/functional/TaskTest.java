@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -38,11 +39,11 @@ public class TaskTest {
     @Parameter(value = 3)
     public String caseTest;
 
+
     public WebDriver getWebDriver() throws MalformedURLException {
         //open driver seleniumm
         //WebDriver webDriver =new ChromeDriver();
-        Capabilities capbilities = DesiredCapabilities.chrome();
-        WebDriver webDriver =new RemoteWebDriver(new URL("http://192.168.10.20:4444/wd/hub"),capbilities);
+        WebDriver webDriver =new RemoteWebDriver(new URL("http://192.168.10.20:4444/wd/hub"),new ChromeOptions());
         webDriver.navigate().to("http://192.168.10.20:8001/tasks");
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return webDriver;
