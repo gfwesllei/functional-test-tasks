@@ -24,6 +24,7 @@ import static br.com.devwell.task.functional.utils.DateUtils.onePastDateString;
 @RunWith(Parameterized.class)
 public class TaskTest {
 
+    @Parameter
     public String todoName;
 
     @Parameter(value = 1)
