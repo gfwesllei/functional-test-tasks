@@ -7,11 +7,8 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
@@ -27,7 +24,6 @@ import static br.com.devwell.task.functional.utils.DateUtils.onePastDateString;
 @RunWith(Parameterized.class)
 public class TaskTest {
 
-    @Parameter(value = 0)
     public String todoName;
 
     @Parameter(value = 1)
