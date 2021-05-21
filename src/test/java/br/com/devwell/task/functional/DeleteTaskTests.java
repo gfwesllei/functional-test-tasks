@@ -1,5 +1,6 @@
 package br.com.devwell.task.functional;
 
+import br.com.devwell.task.functional.utils.DateUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -11,7 +12,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+import static br.com.devwell.task.functional.utils.DateUtils.oneFutureDateString;
+
 public class DeleteTaskTests {
+
+    public static final String SUCCESS = "Success!";
 
     public WebDriver getWebDriver() throws MalformedURLException {
         //open driver seleniumm
@@ -25,12 +30,17 @@ public class DeleteTaskTests {
     public void deleteTaskTest() throws MalformedURLException {
         WebDriver webDriver = getWebDriver();
         try{
-            //click add todo
-            webDriver.findElement(By.linkText("Remove")).click();
-
+            //ad task first
+            webDriver.findElement(By.id("addTodo")).click();
+            webDriver.findElement(By.id("task")).sendKeys("new Task");
+            webDriver.findElement(By.id("dueDate")).sendKeys(oneFutureDateString());
+            webDriver.findElement(By.id("saveButton")).click();
             String message = webDriver.findElement(By.id("message")).getText();
-
-            Assert.assertEquals("Success!",message);
+            Assert.assertEquals(SUCCESS,message);
+            //click remove link
+            webDriver.findElement(By.xpath("//a[@class='btn btn-outline-danger btn-sm']")).click();
+            message = webDriver.findElement(By.id("message")).getText();
+            Assert.assertEquals(SUCCESS,message);
 
         }finally {
             webDriver.quit();
